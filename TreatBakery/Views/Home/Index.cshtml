@@ -1,0 +1,40 @@
+@using TreatBakery.Models;
+
+<h2>Welcome to Treat Bakery!</h2>
+
+<div>
+  <h3>Treats</h3>
+  @if (Model["treats"] is Treat[] treats && treats.Any())
+  {
+    <ul>
+      @foreach (var treat in treats)
+      {
+        <li>@treat.Name</li>
+      }
+    </ul>
+  }
+  else
+  {
+    <p>No treats available.</p>
+  }
+</div>
+
+<div>
+  <h3>Flavors</h3>
+  @if (Model["flavors"] is Flavor[] flavors && flavors.Any())
+  {
+    <ul>
+      @foreach (var flavor in flavors)
+      {
+        <li>@flavor.Name</li>
+      }
+    </ul>
+  }
+  else
+  {
+    <p>No flavors available.</p>
+  }
+</div>
+<p>@Html.ActionLink("Manage treats", "Index", "Treats")</p> 
+<p>@Html.ActionLink("Manage flavors", "Index", "Flavors")</p>
+<p>@Html.ActionLink("Create or manage an account", "Index", "Account")</p>

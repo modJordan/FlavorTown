@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TreatBakery.Models;
 
@@ -10,9 +11,10 @@ using TreatBakery.Models;
 namespace TreatBakery.Migrations
 {
     [DbContext(typeof(TreatBakeryContext))]
-    partial class TreatBakeryContextModelSnapshot : ModelSnapshot
+    [Migration("20231107215054_ModelUpdate")]
+    partial class ModelUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -234,6 +236,9 @@ namespace TreatBakery.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("longtext");
 
+                    b.Property<int?>("FlavorId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -242,6 +247,8 @@ namespace TreatBakery.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("TreatId");
+
+                    b.HasIndex("FlavorId");
 
                     b.HasIndex("UserId");
 
@@ -322,11 +329,17 @@ namespace TreatBakery.Migrations
 
             modelBuilder.Entity("TreatBakery.Models.Treat", b =>
                 {
+                    b.HasOne("TreatBakery.Models.Flavor", "flavor")
+                        .WithMany()
+                        .HasForeignKey("FlavorId");
+
                     b.HasOne("TreatBakery.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+
+                    b.Navigation("flavor");
                 });
 
             modelBuilder.Entity("TreatBakery.Models.TreatFlavor", b =>
