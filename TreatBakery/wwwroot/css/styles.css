@@ -22,7 +22,8 @@ body {
 
 form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  text-overflow: clip;
   justify-content: center;
   align-items: center;
   width: fit-content;
@@ -31,7 +32,6 @@ form {
   margin: 20px;
   background-color: rgb(164, 222, 219);
   border-radius: 10px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
   font-family: 'Crimson Text', serif;
   box-shadow: 0 0 8px #91e0e0;
   opacity: 0.8;
@@ -43,6 +43,7 @@ label {
   vertical-align: middle;
   font-size: 20px;
   padding-right: 5px;
+
 }
 
 input[type="submit"] {

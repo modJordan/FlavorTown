@@ -1,5 +1,6 @@
-<h2>Account Page</h2>
+<h1>Account Page</h1>
 <hr />
+<div class="container">
 @if (User.Identity.IsAuthenticated)
 {
   <p>Hello @User.Identity.Name!</p>
@@ -13,4 +14,5 @@ else
   <p>@Html.ActionLink("Register", "Register")</p>
   <p>@Html.ActionLink("Log in", "Login")</p>
 }
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<p class="button">@Html.ActionLink("Home", "Index", "Home")</p>
+</div>
