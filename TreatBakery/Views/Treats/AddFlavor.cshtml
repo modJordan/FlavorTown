@@ -1,22 +1,22 @@
 @model TreatBakery.Models.Treat
 
-<div class="add">
-<h2>Add a Flavor</h2>
 
-<h4>Add a flavor to this item: @Html.DisplayFor(model => model.Name)</h4>
+<h1>Add a Flavor</h1>
+<hr />
+<div class="container">
+  <h2>Add a flavor to this item: @Html.DisplayFor(model => model.Name)</h4>
 
-@using (Html.BeginForm())
-{
-  @Html.HiddenFor(model => model.TreatId)
+    @using (Html.BeginForm())
+    {
+      @Html.HiddenFor(model => model.TreatId)
 
- <p class="input">@Html.Label("Select flavor")</p>
-  <p class="input">
-  @Html.DropDownList("FlavorId")</p>
+      @Html.Label("Select flavor")
+      @Html.DropDownList("FlavorId")
+      <input type="submit" value="Save" class="input" />
 
- <p class="button"><input type="submit" value="Save" />
- </p>
-}
-
-<p>@Html.ActionLink("Back to list", "Index")</p>
+    }
+<div class="btn-container">
+    <p class="button">@Html.ActionLink("Back to list", "Index")</p>
+</div>
 
 </div>

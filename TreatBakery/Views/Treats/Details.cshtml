@@ -1,31 +1,37 @@
 @using TreatBakery.Models
 @model TreatBakery.Models.Treat
 
-<h2>Treat Details</h2>
+<h1>Treat Details</h1>
 <hr />
-<h3>@Html.DisplayNameFor(model => model.Name)</h3>  
+<div class="container">
+  <h2>@Model.Name</h2>
 
-@if(@Model.JoinEntities.Count == 0)
-{
-  <p>This treat does not have any flavors yet!</p>
-}
-else
-{
-  <h4>This treat has the following flavors:</h4>
-  <ul>
-    @foreach(TreatFlavor join in Model.JoinEntities)
-    {
-      <li>Flavors: @join.Flavor.Name</li>
-      @using (Html.BeginForm("DeleteJoin", "Flavors"))
+  @if (@Model.JoinEntities.Count == 0)
+  {
+    <div class="container">
+      <p>This treat does not have any flavors yet!</p>
+    </div>
+  }
+  else
+  {
+    <h4>This treat has the following flavors:</h4>
+    <ul>
+      @foreach (TreatFlavor join in Model.JoinEntities)
       {
-        @Html.Hidden("joinId", @join.TreatFlavorId)
-        <input type="submit" value="Delete"/>
+        @using (Html.BeginForm("DeleteJoin", "Flavors"))
+        {
+          <p>Flavors: @join.Flavor.Name</p>
+          @Html.Hidden("joinId", @join.TreatFlavorId)
+          <input type="submit" value="Delete" />
+        }
       }
-    }
-  </ul>
-}
+    </ul>
 
-<p>@Html.ActionLink("Back to list", "Index")</p>
-<p>@Html.ActionLink("Edit Treat", "Edit", new { id = Model.TreatId })</p>
-<p>@Html.ActionLink("Add a Flavor", "AddFlavor", new { id = Model.TreatId })</p>
-<p>@Html.ActionLink("Delete Treat", "Delete", new { id = Model.TreatId })</p>
+  }
+<div class="btn-container">
+  <p class="button">@Html.ActionLink("Back to list", "Index")</p>
+  <p class="button">@Html.ActionLink("Edit Treat", "Edit", new { id = Model.TreatId })</p>
+  <p class="button">@Html.ActionLink("Add a Flavor", "AddFlavor", new { id = Model.TreatId })</p>
+  <p class="button">@Html.ActionLink("Delete Treat", "Delete", new { id = Model.TreatId })</p>
+</div>
+</div>

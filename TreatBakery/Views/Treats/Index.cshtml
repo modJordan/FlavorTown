@@ -1,21 +1,28 @@
 @using TreatBakery.Models;
 
 <h1>Treats</h1>
-<hr/>
+<hr />
+<br />
+<br />
+<div class="container">
+  @if (@Model.Count == 0)
+  {
+    <h3>No Treats have been added yet!</h3>
+  }
+  else
+  {
+    <ul>
+      @foreach (Treat treat in Model)
+      {
+        <p>@Html.ActionLink($"{treat.Description}", "Details", new { id = treat.TreatId })</p>
+        <br />
+      }
+    </ul>
+  }
 
-@if (@Model.Count == 0)
-{
-  <h3>No Treats have been added yet!</h3>
-} 
-else
-{
-  <ul>
-    @foreach (Treat treat in Model)
-    {
-      <li>@Html.ActionLink($"{treat.Description}", "Details", new { id = treat.TreatId })</li>
-    }
-  </ul>
-}
+  <div class="btn-container">
+    <p class="button">@Html.ActionLink("Add new treat", "Create")</p>
+    <p class="button">@Html.ActionLink("Home", "Index", "Home")</p>
+  </div>
 
-<p>@Html.ActionLink("Add new treat", "Create")</p>
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+</div>

@@ -1,15 +1,16 @@
 @using TreatBakery.Models;
 
-<h2>Welcome to Treat Bakery!</h2>
+<h1>Welcome to your Treat Bakery!</h1>
+<hr />
 
-<div>
-  <h3>Treats</h3>
+<div class="container">
+  <h2>Treats</h2>
   @if (Model["treats"] is Treat[] treats && treats.Any())
   {
     <ul>
       @foreach (var treat in treats)
       {
-        <li>@treat.Name</li>
+        <p>@treat.Name</p>
       }
     </ul>
   }
@@ -19,14 +20,14 @@
   }
 </div>
 
-<div>
-  <h3>Flavors</h3>
+<div class="container">
+  <h2>Flavors</h2>
   @if (Model["flavors"] is Flavor[] flavors && flavors.Any())
   {
     <ul>
       @foreach (var flavor in flavors)
       {
-        <li>@flavor.Name</li>
+        <p>@flavor.Name</p>
       }
     </ul>
   }
@@ -35,6 +36,12 @@
     <p>No flavors available.</p>
   }
 </div>
-<p>@Html.ActionLink("Manage treats", "Index", "Treats")</p> 
-<p>@Html.ActionLink("Manage flavors", "Index", "Flavors")</p>
-<p>@Html.ActionLink("Create or manage an account", "Index", "Account")</p>
+
+<br />
+<br />
+<br />
+<div class="container">
+  <p class="button">@Html.ActionLink("Manage treats", "Index", "Treats")</p>
+  <p class="button">@Html.ActionLink("Manage flavors", "Index", "Flavors")</p>
+  <p class="button">@Html.ActionLink("Create or manage an account", "Index", "Account")</p>
+</div>
