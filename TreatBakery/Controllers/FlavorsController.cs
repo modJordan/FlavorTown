@@ -4,10 +4,14 @@ using Microsoft.AspNetCore.Mvc;
 using TreatBakery.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 
 namespace TreatBakery.Controllers
 {
+  [Authorize]
   public class FlavorsController : Controller
   {
     private readonly TreatBakeryContext _db;
@@ -35,6 +39,7 @@ namespace TreatBakery.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+    
     public ActionResult Details(int id)
     {
       Flavor thisFlavor = _db.Flavors
@@ -102,5 +107,5 @@ namespace TreatBakery.Controllers
       }
       return RedirectToAction("Details", new { id = flavor.FlavorId });
     }
+    }
   }
-}

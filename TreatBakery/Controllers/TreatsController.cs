@@ -1,18 +1,23 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 using TreatBakery.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
+
 
 namespace TreatBakery.Controllers
 {
+  [Authorize]
   public class TreatsController:Controller
   {
     private readonly TreatBakeryContext _db;
 
-    public TreatsController(TreatBakeryContext db)
+    public TreatsController(UserManager<ApplicationUser> userManager, TreatBakeryContext db)
     {
       _db = db;
     }
@@ -22,19 +27,23 @@ namespace TreatBakery.Controllers
       return View(model);
     }
 
-    public ActionResult Create(int id)
+    public ActionResult Create()
     {
-      Treat thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
-      ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
-      return View(thisTreat);
+      return View();
     }
 
     [HttpPost]
     public ActionResult Create(Treat treat)
     {
+      if (!ModelState.IsValid)
+      {
+        return View();
+      }
+      else{
       _db.Treats.Add(treat);
       _db.SaveChanges();
       return RedirectToAction("Index");
+    }
     }
 
     public ActionResult Details(int id)
